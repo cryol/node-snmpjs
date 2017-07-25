@@ -3,7 +3,7 @@
  */
 
 var test = require('tap').test;
-var ASN1 = require('asn1').Ber;
+var ASN1 = require('asn1-ber').Ber;
 var data;
 
 function

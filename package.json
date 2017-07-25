@@ -1,33 +1,41 @@
 {
-	"author": "Keith M Wesolowski <keith.wesolowski@joyent.com>",
-	"name": "snmpjs",
-	"description": "Simple Network Management Protocol toolkit",
-	"version": "0.1.8",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/joyent/node-snmpjs.git"
-	},
-	"bugs": {
-		"url" : "http://github.com/joyent/node-snmpjs/issues"
-	},
-	"main": "lib/index.js",
-	"engines": {
-		"node": ">=0.6.9"
-	},
-	"dependencies": {
-		"jison": "0.3",
-		"asn1": "~0.2.2",
-		"bunyan": "~0.21",
-		"dtrace-provider": "~0.4"
-	},
-	"devDependencies": {
-		"tap": "~0.4"
-	},
-	"scripts": {
-		"install": "jison -o lib/parser.js lib/snmp.jison",
-		"update": "jison -o lib/parser.js lib/snmp.jison",
-		"pretest": "which gjslint; if [[ \"$?\" = 0 ]] ; then  gjslint --nojsdoc -r lib -r tst; else echo \"Missing gjslint. Skipping lint\"; fi",
-		"test": "./node_modules/.bin/tap ./test",
-		"start": "node agent.js"
-	}
+  "bugs": {
+    "url": "http://github.com/cryol/snmpjs-f/issues"
+  },
+  "dependencies": {
+    "asn1-ber": "~1.0.1",
+    "bunyan": "~0.21",
+    "dtrace-provider": "~0.2",
+    "jison": "0.3"
+  },
+  "description": "Simple Network Management Protocol toolkit",
+  "devDependencies": {
+    "tap": "~0.4"
+  },
+  "directories": {},
+  "engines": {
+    "node": ">=0.6.9"
+  },
+  "homepage": "https://github.com/cryol/snmpjs-f",
+  "main": "lib/index.js",
+  "maintainers": [
+    {
+      "name": "Cryol",
+      "email": "cryol@cryol.kiev.ua"
+    }
+  ],
+  "name": "snmpjs-f",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cryol/snmpjs-f"
+  },
+  "scripts": {
+    "install": "jison -o lib/parser.js lib/snmp.jison",
+    "pretest": "which gjslint; if [[ \"$?\" = 0 ]] ; then  gjslint --nojsdoc -r lib -r tst; else echo \"Missing gjslint. Skipping lint\"; fi",
+    "start": "node agent.js",
+    "test": "tap ./test",
+    "update": "jison -o lib/parser.js lib/snmp.jison"
+  },
+  "version": "0.1.9"
 }
