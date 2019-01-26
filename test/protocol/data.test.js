@@ -9,14 +9,14 @@ var data;
 function
 _data(a)
 {
-	var r = new ASN1.Reader(new Buffer(a));
+	var r = new ASN1.Reader(new Buffer.from(a));
 	return (data.createData({ value: r }));
 }
 
 function
 _data_t(a, t)
 {
-	var r = new ASN1.Reader(new Buffer(a));
+	var r = new ASN1.Reader(new Buffer.from(a));
 	return (data.createData({ type: t, value: r }));
 }
 
@@ -255,11 +255,11 @@ test('octet string construct from reader', function (t) {
 
 	d = _data([0x04, 0x01, 0x00]);
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer([0])), 'string has correct value');
+	t.ok(_cmp_buf(d.value, new Buffer.from([0])), 'string has correct value');
 
 	d = _data([0x04, 0x06, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46]);
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer('ABCDEF', 'ascii')),
+	t.ok(_cmp_buf(d.value, new Buffer.from('ABCDEF', 'ascii')),
 	    'string matches original value');
 
 	t.end();
@@ -270,17 +270,17 @@ test('octet string construct from reader, typed', function (t) {
 
 	d = _data_t([0x04, 0x02, 0x08, 0x09], 'OctetString');
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer([0x8, 0x9])),
+	t.ok(_cmp_buf(d.value, new Buffer.from([0x8, 0x9])),
 	    'string has correct value');
 
 	d = _data_t([0x58, 0x02, 0x17, 0x2f], 'OctetString');
 	_type_tag_chk(t, d, 'OctetString', 0x58);
-	t.ok(_cmp_buf(d.value, new Buffer([0x17, 0x2f])),
+	t.ok(_cmp_buf(d.value, new Buffer.from([0x17, 0x2f])),
 	    'string has correct value');
 
 	d = _data_t([0x58, 0x03, 0x55, 0x44, 0x33], ASN1.OctetString);
 	_type_tag_chk(t, d, 'OctetString', 0x58);
-	t.ok(_cmp_buf(d.value, new Buffer([0x55, 0x44, 0x33])),
+	t.ok(_cmp_buf(d.value, new Buffer.from([0x55, 0x44, 0x33])),
 	    'string matches original value');
 
 	t.end();
@@ -291,14 +291,14 @@ test('octet string construct from primitive/object', function (t) {
 
 	d = data.createData({ type: 'OctetString', value: 'foobar' });
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer('foobar', 'ascii')),
+	t.ok(_cmp_buf(d.value, new Buffer.from('foobar', 'ascii')),
 	    'string matches original value');
 
 	d = data.createData({ type: 'OctetString',
-	    value: new Buffer([0x41, 0x00, 0x42, 0x20, 0x00, 0x43, 0x00]) });
+	    value: new Buffer.from([0x41, 0x00, 0x42, 0x20, 0x00, 0x43, 0x00]) });
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
 	t.ok(_cmp_buf(d.value,
-	    new Buffer([0x41, 0x00, 0x42, 0x20, 0x00, 0x43, 0x00])),
+	    new Buffer.from([0x41, 0x00, 0x42, 0x20, 0x00, 0x43, 0x00])),
 	    'string matches original value');
 
 	t.throws(function () {
@@ -329,12 +329,12 @@ test('octet string value access', function (t) {
 
 	d.value = 'foo';
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer('foo', 'ascii')),
+	t.ok(_cmp_buf(d.value, new Buffer.from('foo', 'ascii')),
 	    'value matches string foo');
 
-	d.value = new Buffer([0x00, 0x02, 0x44, 0x00]);
+	d.value = new Buffer.from([0x00, 0x02, 0x44, 0x00]);
 	_type_tag_chk(t, d, 'OctetString', ASN1.OctetString);
-	t.ok(_cmp_buf(d.value, new Buffer([0x00, 0x02, 0x44, 0x00])),
+	t.ok(_cmp_buf(d.value, new Buffer.from([0x00, 0x02, 0x44, 0x00])),
 	    'value matches assigned buffer');
 
 	t.throws(function () {
@@ -359,10 +359,10 @@ test('octet string value access', function (t) {
 test('octet string encode', function (t) {
 	var v = [
 		'foobar',
-		new Buffer([0x01, 0x00, 0x41, 0x4c, 0x00, 0x20, 0x4d]),
+		new Buffer.from([0x01, 0x00, 0x41, 0x4c, 0x00, 0x20, 0x4d]),
 		'foo bar baz quux',
-		new Buffer([0xfc, 0x24, 0x59, 0xdc, 0x12, 0x00, 0x14, 0xeb]),
-		new Buffer('fööbå®', 'utf8')
+		new Buffer.from([0xfc, 0x24, 0x59, 0xdc, 0x12, 0x00, 0x14, 0xeb]),
+		new Buffer.from('fööbå®', 'utf8')
 	];
 	var ev = [
 		[0x04, 0x06, 0x66, 0x6f, 0x6f, 0x62, 0x61, 0x72],
