@@ -36,4 +36,4 @@ MIT.
 
 ## Bugs
 
-See <https://github.com/joyent/node-snmpjs/issues>.
+See <https://github.com/cryol/snmpjs-f/issues>.
